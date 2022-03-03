@@ -53,17 +53,18 @@ const cartItem = [
 	},
 ];
 
-const totalAmountSumm = function (id) {
+const totalAmountSumm = function () {
+	let totalArray =[];
 	let result = 0;
 	let qty = 0;
-	let totalArray = [];
-	for (let i = 0; i < cartItem.length; i++) {
-		result = catalogItems[cartItem[i].goodId].price * cartItem[i].amount;
+	let i = 0;
+	while(i < cartItem.length){
+		result += cartItem[i].amount * catalogItems[cartItem[i].goodId].price;
 		qty += cartItem[i].amount;
-		result += result;
+		i++;
 	}
-	totalArray["Общая сумма"] = result;
-	totalArray["Общее кол-во"] = qty;
+	totalArray.totalSumm  = result;
+	totalArray.totalAmount = qty;
 	return totalArray;
 }
 
@@ -76,8 +77,6 @@ const plusItem = function (id) {
 			cartItem.push({ goodId: id, amount: 1 });
 			console.log("Добавлен новый товар");
 		}
-		let total = totalAmountSumm(id);
-		console.log(total);
 		return console.log(cartItem);
 	}
 }
@@ -97,7 +96,6 @@ const minusItem = function (id) {
 }
 
 const reseteCart = function () {
-
 	for (let i = 0; i <= cartItem.length; i++) {
 		delete cartItem[i];
 		console.log(cartItem);
@@ -116,3 +114,6 @@ console.log(plusItem(1));
 
 // Очищаем полностью корзину
 // console.log(reseteCart());
+
+// Сумма товара в корзине 
+console.log(totalAmountSumm());
